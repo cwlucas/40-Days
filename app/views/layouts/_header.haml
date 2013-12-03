@@ -1,0 +1,18 @@
+#header
+
+  #logo
+    = link_to(image_tag("application/logo.png", :size => "331x105", :alt => "iCalendar"), "/")
+
+  - cache 'upcoming', expires_in: 30.minutes do
+    - if meetup.next_event
+      #upcoming
+        %span Next meeting:
+        #date= meetup.date
+        #time= meetup.time
+        #venue= meetup.venue
+        #actions
+          = link_to "map & directions", meetup.map_url
+          = link_to "more events&hellip;".html_safe, "http://www.meetup.com/sdruby/"
+
+  #podcast
+    = link_to(image_tag("application/podcast.gif", :size => "102x104", :alt => "iCalendar"), podcasts_url)

@@ -1,0 +1,30 @@
+%h1 New podcast episode
+
+= form_for(@podcast, :html => { :multipart => true }) do |f|
+  = f.error_messages
+
+  = f.label :name
+  = f.text_field :name, :size => 62
+
+  = f.label :description
+  = f.text_area :description, :cols => 60, :rows => 10
+
+  = f.label :movie_link, 'Movie Link'
+  = f.text_field :movie_link, :size => 62
+
+  = f.label :movie_size, 'Movie Size (in bytes)'
+  = f.text_field :movie_size, :size => 17
+
+  = f.label :movie_duration, 'Movie Duration (hh:mm:ss)'
+  = f.text_field :movie_duration, :size => 17
+
+  = f.label :screenshot, "Screenshot (345x267 pixels)"
+  = f.file_field :screenshot
+
+  .check_box
+    = f.check_box :publish
+    = f.label :publish, "Publish this episode"
+
+  = f.submit "Create Episode"
+
+= link_to 'Back', podcasts_path

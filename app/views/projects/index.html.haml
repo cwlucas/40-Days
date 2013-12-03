@@ -1,0 +1,25 @@
+%h1=pt "Projects"
+
+%p#projects_intro
+  SD Ruby members have created
+  = @projects.size
+  open-source projects
+  &mdash;
+  all available on Github.
+
+#featured_project
+  #refresh= link_to_function "refresh", "$('#featured_project_details').fadeOut('fast');$('#featured_project_details').load('/projects/featured').hide().fadeIn('slow');"
+  %span :featured_project =>
+  #featured_project_details
+    = render :partial => "project"
+
+%ul#users_with_projects
+  - @users.each do |user|
+    - unless user.projects.empty?
+      %li
+        .user
+          = link_to(image_tag(user.avatar.url(:small), :size => "36x36"), user)
+          .name
+            = link_to user.full_name, user
+        %ul.projects
+          = show_github_projects_for(user)

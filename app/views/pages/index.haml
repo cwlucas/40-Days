@@ -1,0 +1,82 @@
+- pt "We are San Diego's Ruby community."
+
+#promo
+
+  #sponsor
+    %span
+      Podcast sponsored by
+      = link_to(image_tag("sponsors/podcast/newrelic_small.png", :size => "167x30", :alt => "New Relic"), "http://newrelic.com")
+
+  .screenshot
+    - if @podcast && @podcast.screenshot
+      = link_to(image_tag(@podcast.screenshot.url, :size => "345x267", :alt => "Episode #{@podcast.id}"), podcasts_path)
+
+  %h2
+    Latest from the
+    = "#{link_to "SD Ruby Podcast", podcasts_path}".html_safe
+
+  #name
+    - if @podcast
+      = link_to "Episode #{@podcast.id}: #{@podcast.name}", podcasts_path
+
+  = render :partial => "podcasts/itunes"
+
+#primary.homepage
+
+  %h2 Meetings
+
+  %p
+    We meet the first Thursday of each month, on the campus of UCSD,
+    in the Computer Science &amp; Engineering Building.
+    = link_to("Map and directions", "http://tinyurl.com/2f486e") + "."
+
+  %p
+    We also organize hackfests twice a month, which are held at the offices of
+    = link_to "Monk Development", "http://www.monkdevelopment.com"
+    in Old Town San Diego.
+
+  %p
+    For more information, check out our
+    = link_to("SD Ruby Meetup", "http://www.meetup.com/sdruby/")
+    page.
+
+  %h2 Google Group
+
+  %p
+    We run a
+    = link_to "mailing list", "http://groups.google.com/group/sdruby/topics?gvc=2"
+    for discussion of Ruby-related topics. If you have a question about Ruby (or Ruby on Rails),
+    this group can probably figure it out.
+
+  %p
+    = link_to "Sign up", "http://groups.google.com/group/sdruby"
+    or
+    = link_to("browse the archives", "http://groups.google.com/group/sdruby/topics?gvc=2") + "."
+    (The original list is
+    = link_to("here", "http://list.sdruby.com/") + ".)"
+
+  %h2 Need a Ruby Developer?
+
+  %p
+    Seeking freelance or fulltime developers? Please post a brief summary of your needs to the
+    = link_to("mailing list", "http://groups.google.com/group/sdruby/topics?gvc=2") + "."
+
+  %p#recruiters
+    Recruiters: if you post long job listings, you will be banned.
+    Please use a short summary with a link to more information.
+    Check the archives to make sure your listing hasn't been posted by another recruiter.
+
+  %h2 Want to speak at SD Ruby?
+
+  %p
+    We're looking for awesome speakers. If that sounds like you, check out our
+    = link_to "speaker guidelines", speak_path
+    and get in touch!
+
+  %h2 Follow us on Twitter
+
+  %p
+    Get notified about upcoming SD Ruby meetings and hackfests, as well as new podcast episodes.
+    %a{:href => "https://twitter.com/sdruby", :class => "twitter-follow-button", "data-show-count" => "false", "data-dnt" => "true", "data-size" => "large"} Follow @sdruby
+
+= render "sponsors"

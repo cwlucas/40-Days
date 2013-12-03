@@ -1,0 +1,46 @@
+- pt "Podcast"
+
+= render :partial => "sponsor"
+
+#podcast_episode
+
+  #details
+    %h1 SD Ruby Podcast
+
+    %h2= "#{@podcast.episode_number}: #{@podcast.name}" if @podcast
+
+    %p= markdown(@podcast.description) if @podcast
+
+    .watch_now
+      = link_to "Watch now", @podcast.movie_link if @podcast
+
+    .or
+      %span or
+
+    = render :partial => "itunes"
+
+  .screenshot
+    = link_to(image_tag(@podcast.screenshot.url, :size => "345x267", :alt => "Episode #{@podcast.id}"), @podcast.movie_link) if @podcast
+
+  #joyent
+    Bandwidth provided by
+    = link_to(image_tag("sponsors/joyent.png", :size => "86x25", :alt => "New Relic"), "http://joyent.com")
+
+%ul#filter.unselectable
+  %li.all.current
+    %span= "All"
+  - @years.each do |year|
+    %li{:class => "filter"}
+      %span= year
+  %li
+    %form.search{ action: search_podcasts_path, method: :post }
+      = image_tag 'application/spinner.gif', size: '16x16', class: 'loading'
+      %input{ name: 'query', placeholder: 'Search Episodes' }
+
+#noresults
+  %p No results found
+
+#episodes
+  = render :partial => "podcast", :collection => @podcasts
+
+  %br.clear
